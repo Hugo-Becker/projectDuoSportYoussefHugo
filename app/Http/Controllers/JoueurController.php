@@ -6,6 +6,7 @@ use App\Models\Equipe;
 use App\Models\Joueur;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class JoueurController extends Controller
@@ -17,8 +18,8 @@ class JoueurController extends Controller
      */
     public function index()
     {
-        $equipes=Equipe::all();
-        return view('pages.addPlayer',compact('equipes'));
+        $equipes = Equipe::all();
+        return view('pages.addPlayer', compact('equipes'));
     }
 
     /**
@@ -39,29 +40,43 @@ class JoueurController extends Controller
      */
     public function store(Request $request)
     {
-        Storage::put('public/img', $request->file('src'));
 
-        $photo=new Photo;
-        $photo->src=$request->file('src')->hashName();
+        $photo = new Photo;
+        $photo->src = $request->file('src')->hashName();
         $photo->save();
 
 
-        $joueur=new Joueur;
-        $joueur->nom=$request->nom;
-        $joueur->prenom=$request->prenom;
-        $joueur->age=$request->age;
-        $joueur->genre=$request->genre;
-        $joueur->nat=$request->nat;
-        $joueur->poste=$request->poste;
-        $joueur->tel=$request->tel;
-        $joueur->email=$request->email;
-        $joueur->equipe_id=$request->equipe_id;
-        $joueur->photo_id=$photo->id;
-        $joueur->save();
-
-        return redirect()->back();
 
 
+
+
+
+        $joueur = new Joueur;
+        $joueur->nom = $request->nom;
+        $joueur->prenom = $request->prenom;
+        $joueur->age = $request->age;
+        $joueur->genre = $request->genre;
+        $joueur->nat = $request->nat;
+        $joueur->poste = $request->poste;
+        $joueur->tel = $request->tel;
+        $joueur->email = $request->email;
+        $joueur->equipe_id = $request->equipe_id;
+        $joueur->photo_id = $photo->id;
+
+
+
+        $nbrPlayers = count(DB::table('joueurs')->where('equipe_id', $request->equipe_id)->get());
+        $equipes = Equipe::all();
+        if ($equipes[($request->equipe_id) - 1]->maxPlayers > $nbrPlayers) {
+            Storage::put('public/img', $request->file('src'));
+            $joueur->save();
+            
+            return redirect('dashboard')->with('status', 'Profile updated!');
+
+            // return redirect()->back();
+        } else {
+            dd('nope', $nbrPlayers);
+        }
     }
 
     /**

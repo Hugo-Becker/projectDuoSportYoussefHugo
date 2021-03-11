@@ -14,7 +14,7 @@ class EquipeController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.addTeam');
     }
 
     /**
@@ -35,7 +35,23 @@ class EquipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $equipe=new Equipe;
+
+        $equipe->clubName=$request->clubName;
+        $equipe->ville=$request->ville;
+        $equipe->pays=$request->pays;
+        $equipe->maxPlayers=$request->maxPlayers;
+        $equipe->maxAvants=$request->maxAvants;
+        $equipe->maxCentres=$request->maxCentres;
+        $equipe->maxArrieres=$request->maxArrieres;
+        $equipe->maxRemplaçants=$request->maxRemplaçants;
+
+
+        $equipe->save();
+
+
+        return redirect()->back();
+
     }
 
     /**

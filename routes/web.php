@@ -20,5 +20,8 @@ Route::get('/', function () {
 });
 
 
+// Route::post('/dashb')
+
+
 Route::resource('joueurs',JoueurController::class);
 Route::resource('equipes',EquipeController::class);
