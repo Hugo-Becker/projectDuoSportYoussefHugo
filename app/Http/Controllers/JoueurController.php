@@ -8,6 +8,8 @@ use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\RedirectResponse;
+
 
 class JoueurController extends Controller
 {
@@ -70,12 +72,13 @@ class JoueurController extends Controller
         if ($equipes[($request->equipe_id) - 1]->maxPlayers > $nbrPlayers) {
             Storage::put('public/img', $request->file('src'));
             $joueur->save();
-            
-            return redirect('dashboard')->with('status', 'Profile updated!');
+
+            return redirect('/dashboard')->with('status', 'Profile saved!');
 
             // return redirect()->back();
         } else {
-            dd('nope', $nbrPlayers);
+            // dd('nope', $nbrPlayers);
+            return redirect('/dashboard')->with('status', 'To many players in this team');
         }
     }
 
