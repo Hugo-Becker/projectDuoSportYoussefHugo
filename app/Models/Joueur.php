@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Joueur extends Model
 {
     use HasFactory;
+    public function equipes()
+    {
+        return $this->belongsTo(Equipe::class, 'equipe_id');
+    }
+    public function photos()
+    {
+        return $this->belongsTo(Photo::class, 'photo_id');
+    }
 }

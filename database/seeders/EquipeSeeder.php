@@ -22,6 +22,16 @@ class EquipeSeeder extends Seeder
         //     ->create();
         DB::table('equipes')->insert(
             [
+                [
+                    "clubName"=>"None",
+                    "ville"=>"",
+                    "pays"=>"",
+                    "maxPlayers"=>"9999",
+                    "maxAvants"=>"9999",
+                    "maxArrieres"=>"9999",
+                    "maxCentres"=>"9999",
+                    "maxRemplaçants"=>"9999",
+                   ],
 
                 [
                     "clubName"=>"AKAIS",
@@ -123,6 +133,7 @@ class EquipeSeeder extends Seeder
                     "maxCentres"=>"3",
                     "maxRemplaçants"=>"2",
                    ],
+                   
 
 
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipe;
+use App\Models\Joueur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EquipeController extends Controller
 {
@@ -14,7 +16,14 @@ class EquipeController extends Controller
      */
     public function index()
     {
-        return view('pages.addTeam');
+        $equipes=Equipe::all();
+        $joueurs=Joueur::all();
+
+
+
+
+
+        return view('pages.allTeams',compact('equipes',"joueurs"));
     }
 
     /**
@@ -24,7 +33,7 @@ class EquipeController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.addTeam');
     }
 
     /**
@@ -62,7 +71,10 @@ class EquipeController extends Controller
      */
     public function show(Equipe $equipe)
     {
-        //
+        $joueurs=Joueur::all();
+        
+        return view('shows.showEquipe',compact('equipe','joueurs'));
+
     }
 
     /**

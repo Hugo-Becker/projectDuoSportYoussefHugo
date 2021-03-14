@@ -4,7 +4,7 @@
 
     <div class="container">
 
-        <form action="joueurs" method="POST" enctype="multipart/form-data">
+        <form action="/joueurs" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mt-3" >
@@ -29,7 +29,12 @@
             </div>
             <div class="mt-3" >
                 <label for="">Poste</label>
-                <input name="poste" class="form-control" type="text">
+                <select name="poste" id="">
+                    <option value="Avant">Avant</option>
+                    <option value="Centre">Centre</option>
+                    <option value="Arriere">Arriere</option>
+                    <option value="Remplaçant">Remplaçant</option>
+                </select>
             </div>
             <div class="mt-3" >
                 <label for="">Telephone</label>
@@ -46,6 +51,7 @@
                     @foreach ($equipes as $equipe)
                         <option value="{{$equipe->id}}">{{$equipe->clubName}}</option>
                     @endforeach
+
                 </select>
             </div>
 

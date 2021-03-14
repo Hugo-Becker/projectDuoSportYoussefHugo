@@ -20,8 +20,9 @@ class JoueurController extends Controller
      */
     public function index()
     {
-        $equipes = Equipe::all();
-        return view('pages.addPlayer', compact('equipes'));
+        $joueurs=Joueur::all();
+        return view('pages.allPlayers',compact('joueurs'));
+        
     }
 
     /**
@@ -31,7 +32,8 @@ class JoueurController extends Controller
      */
     public function create()
     {
-        //
+        $equipes = Equipe::all();
+        return view('pages.addPlayer', compact('equipes'));
     }
 
     /**
@@ -69,16 +71,36 @@ class JoueurController extends Controller
 
         $nbrPlayers = count(DB::table('joueurs')->where('equipe_id', $request->equipe_id)->get());
         $equipes = Equipe::all();
-        if ($equipes[($request->equipe_id) - 1]->maxPlayers > $nbrPlayers) {
-            Storage::put('public/img', $request->file('src'));
-            $joueur->save();
 
-            return redirect('/dashboard')->with('status', 'Profile saved!');
 
-            // return redirect()->back();
+        $nbrPlayersAtPoste=count(DB::table('joueurs')->where('equipe_id', $request->equipe_id)->where('poste', $request->poste)->get());
+
+
+
+
+
+
+        if  ($equipes[($request->equipe_id) - 1]->maxPlayers > $nbrPlayers ) {
+
+
+            $path="max".$request->poste ."s";
+
+            if ($equipes[($request->equipe_id) - 1]->$path > $nbrPlayersAtPoste) {
+
+                Storage::put('public/img', $request->file('src'));
+                  $joueur->save();
+                 return redirect('/dashboard')->with('status', 'Profile saved!');
+
+            }
+
+            else{
+                return redirect('/dashboard')->with('error', 'To many players at this poste');
+            }
+
+
+            
         } else {
-            // dd('nope', $nbrPlayers);
-            return redirect('/dashboard')->with('status', 'To many players in this team');
+            return redirect('/dashboard')->with('error', 'To many players in this team');
         }
     }
 
@@ -90,7 +112,10 @@ class JoueurController extends Controller
      */
     public function show(Joueur $joueur)
     {
-        //
+        $equipes = Equipe::all();
+        $photos = Photo::all();
+
+        return view('shows.showPlayer',compact('joueur','equipes','photos'));
     }
 
     /**
