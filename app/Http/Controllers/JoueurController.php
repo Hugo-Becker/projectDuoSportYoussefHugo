@@ -20,9 +20,8 @@ class JoueurController extends Controller
      */
     public function index()
     {
-        $joueurs=Joueur::all();
-        return view('pages.allPlayers',compact('joueurs'));
-        
+        $joueurs = Joueur::all();
+        return view('pages.allPlayers', compact('joueurs'));
     }
 
     /**
@@ -73,32 +72,26 @@ class JoueurController extends Controller
         $equipes = Equipe::all();
 
 
-        $nbrPlayersAtPoste=count(DB::table('joueurs')->where('equipe_id', $request->equipe_id)->where('poste', $request->poste)->get());
+        $nbrPlayersAtPoste = count(DB::table('joueurs')->where('equipe_id', $request->equipe_id)->where('poste', $request->poste)->get());
 
 
 
 
 
 
-        if  ($equipes[($request->equipe_id) - 1]->maxPlayers > $nbrPlayers ) {
+        if ($equipes[($request->equipe_id) - 1]->maxPlayers > $nbrPlayers) {
 
 
-            $path="max".$request->poste ."s";
+            $path = "max" . $request->poste . "s";
 
             if ($equipes[($request->equipe_id) - 1]->$path > $nbrPlayersAtPoste) {
 
                 Storage::put('public/img', $request->file('src'));
-                  $joueur->save();
-                 return redirect('/dashboard')->with('status', 'Profile saved!');
-
-            }
-
-            else{
+                $joueur->save();
+                return redirect('/dashboard')->with('status', 'Profile saved!');
+            } else {
                 return redirect('/dashboard')->with('error', 'To many players at this poste');
             }
-
-
-            
         } else {
             return redirect('/dashboard')->with('error', 'To many players in this team');
         }
@@ -115,7 +108,7 @@ class JoueurController extends Controller
         $equipes = Equipe::all();
         $photos = Photo::all();
 
-        return view('shows.showPlayer',compact('joueur','equipes','photos'));
+        return view('shows.showPlayer', compact('joueur', 'equipes', 'photos'));
     }
 
     /**

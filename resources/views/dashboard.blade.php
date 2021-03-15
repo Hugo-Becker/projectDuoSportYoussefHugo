@@ -13,17 +13,17 @@
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
-            
-            
+
+
         @endif
 
     </div>
     <div class="container my-5">
 
         {{-- two random Teams filled --}}
-        <section class="bg-dark text-light">
-            <div class="container">
-                <h1> Deux Equipes Completes</h1>
+        <section class="bg-secondary text-light">
+            <div class="container ">
+                <h1 class="text-center"> Deux Equipes Completes</h1>
                 <table class="text-light table table-striped mb-5">
                     <thead>
                         <tr>
@@ -35,13 +35,14 @@
                     </thead>
                     <tbody>
                         @foreach ($equipes as $equipe)
-                            @foreach ($equipes->where('maxPlayers',(count($joueurs->where('equipe_id','=',($equipe->id))))) as $fullEquipe)
-                                <tr>
-                                    <th scope="row">{{ $fullEquipe->clubName }}</th>
-                                    <td>{{ $fullEquipe->ville }}</td>
-                                    <td>{{ $fullEquipe->pays }}</td>
-                                </tr>
-                            @endforeach
+                            @foreach ($equipes->where('maxPlayers',(count($joueurs->where('equipe_id','=',($equipe->id)))))
+                            as $fullEquipe)
+                            <tr>
+                                <th scope="row">{{ $fullEquipe->clubName }}</th>
+                                <td>{{ $fullEquipe->ville }}</td>
+                                <td>{{ $fullEquipe->pays }}</td>
+                            </tr>
+                        @endforeach
                         @endforeach
                     </tbody>
                 </table>
@@ -79,7 +80,7 @@
 
 
         {{-- 4 player avec equipe --}}
-        <section class="bg-dark text-light">
+        <section class="bg-secondary text-light">
             <div class="container">
                 <h1 class="text-center mb-5">Joueurs appartenant à une équipe
                 </h1>
@@ -110,7 +111,7 @@
         <section>
 
             <div class="container">
-                <h1> Deux Equipes PAS Completes</h1>
+                <h1 class="text-center "> Deux Equipes PAS Completes</h1>
                 <table class=" table table-striped mb-5">
                     <thead>
                         <tr>
@@ -124,8 +125,8 @@
                         @foreach ($notFull2 as $i)
                             <tr>
                                 <th scope="row">{{ $notFull[$i]->clubName }}</th>
-                                <td>{{$notFull[$i]->ville }}</td>
-                                <td>{{$notFull[$i]->pays }}</td>
+                                <td>{{ $notFull[$i]->ville }}</td>
+                                <td>{{ $notFull[$i]->pays }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -140,9 +141,9 @@
         {{-- EQUIPES UE --}}
         <section>
 
-            <div class="container">
-                <h1>  Equipes Europe</h1>
-                <table class=" table table-striped mb-5">
+            <div class="container bg-secondary">
+                <h1 class="text-center text-light"> Equipes Europe</h1>
+                <table class=" table text-light table-striped mb-5">
                     <thead>
                         <tr>
                             <th scope="col">Club Name</th>
@@ -155,8 +156,8 @@
                         @foreach ($EUteams as $equipe)
                             <tr>
                                 <th scope="row">{{ $equipe->clubName }}</th>
-                                <td>{{$equipe->ville }}</td>
-                                <td>{{$equipe->pays }}</td>
+                                <td>{{ $equipe->ville }}</td>
+                                <td>{{ $equipe->pays }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -169,7 +170,7 @@
         <section>
 
             <div class="container">
-                <h1>  Equipes Europe</h1>
+                <h1 class="text-center"> Equipes HORS Europe</h1>
                 <table class=" table table-striped mb-5">
                     <thead>
                         <tr>
@@ -183,8 +184,8 @@
                         @foreach ($noEUteams as $equipe)
                             <tr>
                                 <th scope="row">{{ $equipe->clubName }}</th>
-                                <td>{{$equipe->ville }}</td>
-                                <td>{{$equipe->pays }}</td>
+                                <td>{{ $equipe->ville }}</td>
+                                <td>{{ $equipe->pays }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -199,10 +200,10 @@
 
         <section>
 
-            <div class="container">
-                <h1 class="text-center mb-5">Joueurs RPZ
+            <div class="container text-light bg-secondary">
+                <h1 class="text-center text-light mb-5">Joueurs réprésentant leur pays
                 </h1>
-                <table class="table table-striped mb-5">
+                <table class="table text-light table-striped mb-5">
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
@@ -228,13 +229,13 @@
 
 
 
-        
-                {{-- girl teamed --}}
+
+        {{-- girl teamed --}}
 
         <section>
 
             <div class="container">
-                <h1 class="text-center mb-5">girl teamed 
+                <h1 class="text-center mb-5">Joueuses ayant une équipe
                 </h1>
                 <table class="table table-striped mb-5">
                     <thead>
@@ -259,14 +260,14 @@
             </div>
 
         </section>
-                {{-- boy teamed --}}
+        {{-- boy teamed --}}
 
         <section>
 
-            <div class="container">
-                <h1 class="text-center mb-5">boy teamed 
+            <div class="container bg-secondary text-light">
+                <h1 class="text-center  mb-5">Joueurs ayant une équipe
                 </h1>
-                <table class="table table-striped mb-5">
+                <table class="text-light table table-striped mb-5">
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
@@ -291,7 +292,7 @@
         </section>
 
 
- 
+
     </div>
 
 

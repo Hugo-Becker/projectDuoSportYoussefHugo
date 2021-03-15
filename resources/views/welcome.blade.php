@@ -12,6 +12,8 @@
     </div>
 @endif
 
+<h1 class="text-center mt-5">VOLLEYBALL</h1>
+
 </div>
 
     
